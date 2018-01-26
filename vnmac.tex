@@ -1,0 +1,138 @@
+% Set up the base form.
+\usepackage[resetfonts]{cmap} %% We need to load the T2A font encoding
+\usepackage[T1,T2A]{fontenc}  %% to use the Cyrillic fonts with Russian texts.
+\usepackage[
+  main=english, %% By using `czech` or `slovak` as the main locale
+                %% instead of `english`, you can typeset the thesis
+                %% in either Czech or Slovak, respectively.
+  czech         %% The additional keys allow
+]{babel}        %% foreign texts to be typeset as follows:
+\usepackage{geometry}
+\usepackage[all]{nowidow}
+\usepackage[protrusion]{microtype}
+\makeatletter
+\def\vnstyle{%
+  \newgeometry{top=30mm,bottom=50mm,left=41mm,right=41mm,includeheadfoot}
+  \renewcommand\section{\@startsection{section}{1}{\z@}%
+                         {-15  \p@ \@plus -3\p@ \@minus -3\p@}%
+                         {4\p@ \@plus 2\p@ \@minus 2\p@}%
+                         {\normalfont\large\bfseries\boldmath
+                          \rightskip=\z@ \@plus 8em\pretolerance=10000 }}
+  \renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                         {-12\p@ \@plus -3\p@ \@minus -3\p@}%
+                         {3\p@ \@plus 1\p@ \@minus 1\p@}%
+                         {\normalfont\normalsize\bfseries\boldmath
+                          \rightskip=\z@ \@plus 8em\pretolerance=10000 }}
+  % \renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+  %                        {-18\p@ \@plus -4\p@ \@minus -4\p@}%
+  %                        {-0.5em \@plus -0.22em \@minus -0.1em}%
+  %                        {\normalfont\normalsize\bfseries\boldmath}}
+  % typesetting optimizations/setup
+  \widowpenalty10000	% no windows
+  \hfuzz2pt           % not to be bothered by \Overfulls of this size
+  \abovedisplayskip =.3\abovedisplayskip
+  \belowdisplayskip =.3\belowdisplayskip
+  \setlength\intextsep{0pt}
+  \abovecaptionskip =.5\abovecaptionskip
+  \belowcaptionskip =.5\belowcaptionskip
+  %\floatsep =.5\floatsep
+  % Alter some LaTeX defaults for better treatment of figures:
+      % See p.105 of "TeX Unbound" for suggested values.
+      % See pp. 199-200 of Lamport's "LaTeX" book for details.
+      %   General parameters, for ALL pages:
+      \renewcommand{\topfraction}{0.9}	% max fraction of floats at top
+      \renewcommand{\bottomfraction}{0.8}	% max fraction of floats at bottom
+      %   Parameters for TEXT pages (not float pages):
+      \setcounter{topnumber}{2}
+      \setcounter{bottomnumber}{2}
+      \setcounter{totalnumber}{4}     % 2 may work better
+  %    \setcounter{dbltopnumber}{2}    % for 2-column pages
+  %    \renewcommand{\dbltopfraction}{0.9}	% fit big float above 2-col. text
+      \renewcommand{\textfraction}{0.07}	% allow minimal text w. figs
+      %   Parameters for FLOAT pages (not text pages):
+      \renewcommand{\floatpagefraction}{0.7}	% require fuller float pages
+    % N.B.: floatpagefraction MUST be less than topfraction !!
+  %    \renewcommand{\dblfloatpagefraction}{0.7}	% require fuller float pages
+  }
+\makeatother
+
+% Additional paper-specific packages
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[proportional,osf]{newpxtext}
+\usepackage{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+\usepackage{tikz}
+\usetikzlibrary{positioning,fit,shapes,arrows}
+\usepackage{booktabs}
+\usepackage{xparse}
+\usepackage{xspace}
+\usepackage{rotating}
+\usepackage{placeins}
+\usepackage{floatpag}
+\usepackage{bm}
+\rotfloatpagestyle{plain}
+\usepackage[
+backend=biber,
+style=iso-numeric,
+sorting=none,
+autolang=other,
+sortlocale=auto,
+maxcitenames=2,
+]{biblatex}
+\addbibresource{main.bib}
+\addbibresource{sojka.bib}
+
+% Additional paper-specific markup
+\newcommand{\orcid}[1]{\href{https://orcid.org/#1}{\texttt{#1}}}
+\newcommand{\email}[1]{\href{mailto:#1}{\texttt{#1}}}
+\def\abbr#1{\textsc{\MakeLowercase{#1}}}
+\newenvironment{liningfigs}{\renewcommand*{\rmdefault}{zpltlf}\normalfont}{}
+\newif\ifthesis\thesisfalse
+\newif\ifdebug\debugtrue
+\newif\iflong\longtrue
+\newif\ifreview\reviewfalse
+\newcommand*\rot{\rotatebox{70}}
+\newcommand{\op}[1]{\ensuremath{\operatorname{#1}}}
+\newcommand{\avg}{\op{avg}}
+\newcommand{\wavg}{\op{wavg}}
+\newcommand{\sign}{\op{sign}}
+\newcommand{\etal}{\unskip~\textit{et\penalty100\ al.}\xspace}
+\newcommand{\longsubsection}[1]{\iflong\subsection{#1}\fi}
+\def\abbr#1{\textsc{\MakeLowercase{#1}}}
+\let\term\emph
+\newcommand{\omid}{\rotatebox[origin=c]{-90}{$\ominus$}}
+\makeatletter
+\newcommand*{\bigominus}{\DOTSB\bigominus@\slimits@}
+\newcommand{\bigominus@}{\mathop{\mathpalette\bigominus@@\relax}}
+\newcommand{\bigominus@@}[2]{%
+  \vcenter{\hbox{%
+    \sbox\z@{$\m@th#1\bigoplus$}%
+    \resizebox{\wd\z@}{!}{$\m@th#1\ominus$}%
+  }}%
+}
+\makeatother
+\newcommand{\bigomid}{\rotatebox[origin=c]{-90}{$\bigominus$}}
+\NewDocumentCommand\todo{ggo}{%
+  \ifdebug
+    \textcolor{red}{TODO}%
+    \IfValueT{#1}{\textcolor{red}{:~}}%
+    \IfValueT{#1}{\textcolor{blue}{#1}}\nopagebreak%
+    \IfValueT{#2}{\\\textcolor{orange}{#2}}\nopagebreak%
+    \IfValueT{#3}{\\\textcolor{magenta}{#3}}%
+  \fi}
+% \done has the same args as \todo
+\NewDocumentCommand\done{ggo}{%
+  \ifdebug
+    \textcolor{green}{DONE}%
+    \IfValueT{#1}{\textcolor{green}{:~}}%
+    \IfValueT{#1}{\textcolor{blue}{\sout{#1}}}\nopagebreak%
+    \IfValueT{#2}{\\\textcolor{orange}{\sout{#2}}}\nopagebreak%
+    \IfValueT{#3}{\\\textcolor{magenta}{\sout{#3}}}%
+  \fi}
+\newcommand*{\tran}{^{\mkern-1.5mu\mathsf{T}}}
+\let\note=\footnote
+\hyphenation{Wiki-pe-dia}
+\let\emph=\textit
+\let\subsubsection=\paragraph

@@ -1,0 +1,79 @@
+\usepackage{a4wide}
+
+\newcommand{\FIMUreport}[5]{%
+{
+% Page layout -- do not change!!!
+\renewcommand{\baselinestretch}{1.24}
+\addtolength{\textheight}{2cm}
+\addtolength{\topmargin}{-1cm}
+\thispagestyle{empty}
+
+\renewcommand{\familydefault}{ppl}
+\renewcommand{\encodingdefault}{T1}
+\renewcommand{\bfdefault}{bx}
+
+\font \fntfilogo=fi-logo at 3.5cm
+\newcommand{\fntfimu}{\fontencoding{T1}\fontfamily{ppl}\fontseries{m}%
+     \fontsize{3.5cm}{3.5cm}\selectfont}
+\newcommand{\fntstandard}{\fontencoding{T1}\fontfamily{ppl}\fontseries{b}%
+     \fontsize{15pt}{17pt}\selectfont}
+\newcommand{\fnttitle}{\fontencoding{T1}\fontfamily{ppl}\fontseries{b}%
+     \fontsize{23pt}{25pt}\selectfont}
+\fntstandard
+
+\noindent
+\raisebox{6ex}{\fntfilogo SL}
+\hfill
+{\fntfimu FI MU}\\[1ex]
+\rule[1mm]{1.0\textwidth}{1.2pt}
+\begin{flushright}
+{\fntstandard Faculty of Informatics\\[.3ex] Masaryk University Brno}
+\end{flushright}
+\centering
+\vfill
+
+\begin{parbox}{\textwidth}{\centering\fnttitle #1}\end{parbox}
+\vspace*{1.2cm}
+
+by
+\vspace*{1.2cm}
+
+#2
+\vfill
+
+FI MU Report Series \hfill  FIMU-RS-#3-#5\\
+\raisebox{1ex}{\rule{1.0\textwidth}{1.2pt}}
+\raisebox{1ex}{Copyright  
+\textcopyright{} #3, FI MU} \hfill
+\raisebox{1ex}{#4\ #3}
+\newpage
+\thispagestyle{empty}
+\newlength{\odsaz}
+\settowidth{\odsaz}{Copyright \textcopyright{} #3,}
+\noindent
+\begin{tabbing}
+Copyright
+\textcopyright{} #3,\ \= Faculty of Informatics, Masaryk University.\\
+\> All rights reserved. \\[1\baselineskip]
+\> Reproduction of all or part of this work\\
+\> is permitted for educational or research use\\
+\> on condition that this copyright notice is\\
+\> included in any copy. \\
+\end{tabbing}
+\vfill
+
+\noindent
+\begin{tabbing}
+Publications in the FI MU Report Series are in general accessible \\via
+WWW: \\[1ex]
+\hspace{\odsaz}\ \= {\tt http://www.fi.muni.cz/reports/}\\[4ex]
+%
+Further information can be obtained by contacting: \\[1ex]
+\> Faculty of Informatics\\
+\> Masaryk University\\
+\> Botanická 68a\\
+\> 602\,00 Brno\\
+\> Czech Republic
+\end{tabbing}
+}}
+
