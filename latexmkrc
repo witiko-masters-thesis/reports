@@ -5,6 +5,5 @@
 #            later of latexmk, not for earlier versions.
 #
 
-$pdf_mode = 4;
+$pdf_mode = 1;
 $postscript_mode = $dvi_mode = 0;
-$makeindex = "makeindex %O -s main.ist -o %D %S"
